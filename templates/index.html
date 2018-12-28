@@ -1,0 +1,70 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Hello from Flask</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+</head>
+<body style="background-image:url(/static/back.jpg);background-size:cover;background-attachment:fixed;">
+	<div class="container" style='margin-top:60px;'>
+		<form action="/search" method="get">
+	        <div class="form-group has-feedback">
+	          <!--has-feedback样式/反馈控制/ form-control-feedback 增加这两个样式后，span代表的放大镜就可以放在搜索栏里面-->
+	          <label for="search" class="sr-only">搜索关键字</label>
+	          <input type="search" placeholder="请输入city name" id="search" class="form-control" name="cityname">
+	          <span class="glyphicon glyphicon-search  form-control-feedback"></span>
+	        </div>
+	      </form>
+		
+		<div class="card bg-dark text-white" style="text-shadow:2px 2px 1px #000;">
+		  <img src='{{ weather['pic'] }}' class="card-img" style="" alt="...">
+		  <div class="card-img-overlay">
+		  	{% if weather['time'].split(':')[0] in ['00', '01' ,'02','03','04','05','06','07','08','09','10'] %}
+		    	<h1 class="card-title">Morning! {{ weather['cityname'] }}</h1>
+		    {% elif weather['time'].split(':')[0] in ['11','12'] %}
+		    	<h1 class="card-title">Noon! {{ weather['cityname'] }}</h1>
+		    {% elif weather['time'].split(':')[0] in ['13','14','15','16','17','18'] %}
+		    	<h1 class="card-title">AfterNoon! {{ weather['cityname'] }}</h1>
+		    {% elif weather['time'].split(':')[0] in ['19','20','21','22','23'] %}
+		    	<h1 class="card-title">Evening! {{ weather['cityname'] }}</h1>
+		    {% endif %}	
+
+		    {% if weather['limitnumber'] != '' %}
+				<p class="card-text" style="font-size: 1.5rem;">Today The LIMIT NUMBER OF CAR are {{ weather['limitnumber'] }}</p>
+			{% else %}
+		    	<p class="card-text"></p>
+		    {% endif %}	
+		    
+		    
+		  </div>
+		  <div class="row" style="margin-left:20px;bottom: 30px; position:absolute;">
+		  	<div>
+		    	<p style="font-size: 100px;padding-right: 80px; margin-top:10px;">{{ weather['temp'] }}℃</p>
+				<p style="font-size: 30px;padding-right: 80px;margin-top:-40px;">PM2.5 - {{ weather['aqi_pm25'] }}</p>
+			</div>
+			<div style="padding-top:50px;margin-left: -40px;">
+		    	<p class="card-text" style="font-size: 1.2rem;">|&nbsp;&nbsp;&nbsp;湿度 - {{ weather['SD'] }} &nbsp; &nbsp;| &nbsp; &nbsp;24h降水量 - {{ weather['rain24h'] }}ml &nbsp;&nbsp;| &nbsp;&nbsp;</p>	
+			    <p class="card-text" style="font-size: 1.2rem;">{{ weather['WD'] }} {{ weather['WS'] }}, 能见度{{ weather['njd'] }}</p>
+			    <p class="card-text">{{ weather['time'] }} {{ weather['date'] }}</p>
+		    </div>
+		</div>
+		</div>
+
+	</div>
+	<!-- {% if weather %}
+	  <h1>Hello {{ weather }}!</h1>
+	{% else %}
+	  <h1>Hello, World!</h1>
+	{% endif %} -->
+</body>
+</html>

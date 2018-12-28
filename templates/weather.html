@@ -1,0 +1,73 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Hello from Flask</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+</head>
+<body style="background-image:url(/static/back.jpg);background-size:cover;background-attachment:fixed;">
+	<div class="container" style='margin-top:60px;'>
+		<div class="row container-fluid">
+			<div class="card mb-3">
+			  <img src="{{ weather['pic'] }}" class="card-img-top" alt="..." style="width: 65rem;">
+			  <div class="row card-body">
+				  <div class="card-body">
+				    <h2 class="card-title">{{ weather['cityname'] }} - {{ weather['weather'] }}/{{ weather['weathere'] }}</h2>
+				    {% if weather['limitnumber'] != '' %}
+				    	<p class="card-text" style="font-size: 1.5rem;">Today The LIMIT NUMBER OF CAR are {{ weather['limitnumber'] }}</p>
+				    {% else %}
+				    	<p class="card-text"></p>
+				    {% endif %}	
+				    <p class="card-text" style="font-size: 1.2rem;">|&nbsp;&nbsp;&nbsp;湿度 - {{ weather['SD'] }} &nbsp; &nbsp;| &nbsp; &nbsp;24h降水量 - {{ weather['rain24h'] }}ml &nbsp;&nbsp;| &nbsp;&nbsp;</p>
+				    <p class="card-text" style="font-size: 1.2rem;">{{ weather['WD'] }} {{ weather['WS'] }}, 能见度{{ weather['njd'] }}</p>
+				    <p class="card-text"><small class="text-muted">{{ weather['time'] }} {{ weather['date'] }}</small></p>
+				    <a class="btn btn-primary btn-lg" href="{{ url_for('index') }}" role="button">BackHome</a>
+				  </div>
+				  <div class="">
+				  		<p style="font-size: 100px;padding-right: 80px; margin-top:10px;">{{ weather['temp'] }}℃</p>
+						<p style="font-size: 30px;padding-right: 80px;margin-top:-40px;">PM2.5 - {{ weather['aqi_pm25'] }}</p>
+
+				  </div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- <div class="row container">
+			<div class="card" style="width: 18rem;margin-left: 10px;">
+			  <img src="..." class="card-img-top" alt="...">
+			  <div class="card-body">
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			  </div>
+			</div>
+			<div class="card" style="width: 18rem;margin-left: 10px;">
+			  <img src="..." class="card-img-top" alt="...">
+			  <div class="card-body">
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			  </div>
+			</div>
+			<div class="card" style="width: 18rem;margin-left: 10px;">
+			  <img src="..." class="card-img-top" alt="...">
+			  <div class="card-body">
+			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			  </div>
+			</div>
+		</div>
+
+	</div>
+	{% if weather %}
+	  <h1>Hello {{ weather }}!</h1>
+	{% else %}
+	  <h1>Hello, World!</h1>
+	{% endif %} -->
+</body>
+</html>
